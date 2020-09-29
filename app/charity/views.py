@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for
 from .. import db
 from . import charity
-from ..models import Charity
+from ..models import Charity,Donations,Donor
 from .forms import applicationform
 
 @charity.route('/charity/application', methods =['GET','POST'])
@@ -23,6 +23,10 @@ def apply():
     
     return render_template('charity/application.html', form = form)
 
+@charity.route('/charity/donors')
+def charitydonors():
+
+    non_anonymous_donors = Donor.query.filter_by(donor_anonymity = True).all()
 
 
     
