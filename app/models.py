@@ -12,8 +12,12 @@ class Charity(db.Model):
     email = db.Column(db.String)
     Address = db.Column(db.String)
     donationsReceived = db.Column(db.Integer)
-    Beneficiaries = db.relationship('Beneficiaries', backref = 'Charity', lazy = 'dynamic')
+    Beneficiaries = db.relationship('Beneficiaries', backref = 'charity', lazy = 'dynamic')
     accountDetails = db.Column(db.Integer)
+
+    def save_charity(self):
+        db.session.add(self)
+        db.session.commit()
 
 class Beneficiaries(db.Model):
 
