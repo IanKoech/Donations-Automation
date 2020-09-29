@@ -7,11 +7,13 @@ class Charity(db.Model):
 
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String)
-    Todolist = db.Column(db.String)
-    Contacts = db.Column(db.String)
-    Donations_received = db.Column(db.Integer)
+    toDoList = db.Column(db.String)
+    phoneNumber = db.Column(db.String)
+    email = db.Column(db.String)
+    Address = db.Column(db.String)
+    donationsReceived = db.Column(db.Integer)
     Beneficiaries = db.relationship('Beneficiaries', backref = 'Charity', lazy = 'dynamic')
-    Account_details = db.Column(db.Integer)
+    accountDetails = db.Column(db.Integer)
 
 class Beneficiaries(db.Model):
 
