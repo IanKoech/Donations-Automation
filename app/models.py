@@ -10,7 +10,7 @@ class Charity(db.Model):
     Todolist = db.Column(db.String)
     Contacts = db.Column(db.String)
     Donations_received = db.Column(db.Integer)
-    Beneficiaries = db.Relationship('Beneficiaries', backref = 'Charity', lazy = 'dynamic')
+    Beneficiaries = db.relationship('Beneficiaries', backref = 'Charity', lazy = 'dynamic')
     Account_details = db.Column(db.Integer)
 
 class Beneficiaries(db.Model):
@@ -21,7 +21,7 @@ class Beneficiaries(db.Model):
     name = db.Column(db.String)
     inventory = db.Column(db.Integer)
     stories = db.Column(db.String)
-    Charity = db.Column(db.Integer, db.ForeignKey = 'charity.id')
+    Charity = db.Column(db.Integer, db.ForeignKey('charity.id'))
 
 class Donor(db.Model):
 
@@ -30,8 +30,8 @@ class Donor(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String)
     anonymity = db.Column(db.Boolean)
-    accounty_details = db.Column(db.Integer)
-    charities = db.Column(db.List)
+    accountdetails = db.Column(db.Integer)
+    charities = db.Column(db.String)
     donation_frequency = db.Column(db.Boolean)
     reminding_time = db.Column(db.DateTime,default =datetime.utcnow)
 
@@ -40,7 +40,7 @@ class Donations(db.Model):
     __tablename__ = 'donations'
 
     id = db.Column(db.Integer, primary_key = True)
-    Donor = db.Column(db.String)
+    donor = db.Column(db.String)
     Donee = db.Column(db.String)
     Amount = db.Column(db.Integer)
     Date = db.Column(db.DateTime, default = datetime.utcnow)

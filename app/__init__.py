@@ -1,9 +1,12 @@
 from flask import Flask
 from config import config_options
 from flask_sqlalchemy import SQLAlchemy
+from flask_blueprint import Blueprint
+
 
 #instantiating flask extensions
 db = SQLAlchemy()
+# blueprint = Blueprint()
 
 
 def create_app(config_name):
@@ -17,6 +20,11 @@ def create_app(config_name):
 
     #Initializing flask extensions
     db.init_app(app)
+    # blueprint.init_app(app)
+
+    #register the charity blueprint
+    from .charity import charity as charity_blueprint
+    app.register_blueprint(charity_blueprint)
 
     return app
 
