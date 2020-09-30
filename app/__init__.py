@@ -29,6 +29,10 @@ def create_app(config_name):
     from .charity import charity as charity_blueprint
     app.register_blueprint(charity_blueprint)
 
+    #register donor blueprint
+    from .donor import donor as donor_blueprint
+    app.register_blueprint(donor_blueprint)
+
     return app
 
 

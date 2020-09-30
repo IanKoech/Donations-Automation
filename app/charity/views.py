@@ -23,10 +23,18 @@ def apply():
     
     return render_template('charity/application.html', form = form)
 
-@charity.route('/charity/donors')
-def charitydonors():
+@charity.route('/charity/profile', methods = ['GET', 'POST'])
+def charityprofile():
+    charity = Charity.query.filter_by(name = 'Dancan Oruko' ).first()
+    donations_recieved = Donations.query.filter_by(Donee = charity.name ).all()
+    anonymous_donations = donations_recieved.filter_by(donorAnonimity =  False)
+    nonanonymous_donations = donations_recieved.filter_by(donorAnonimity =  True)
 
-    non_anonymous_donors = Donor.query.filter_by(donor_anonymity = True).all()
+    return render_template('/charity/charityprofile.html')
+
+
+
+    
 
 
     
