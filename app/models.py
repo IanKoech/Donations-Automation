@@ -30,6 +30,11 @@ class Beneficiaries(db.Model):
     stories = db.Column(db.String)
     Charity = db.Column(db.Integer, db.ForeignKey('charity.id'))
 
+    def save_beneficiary(self):
+        db.session.add(self)
+        db.session.commit()
+
+
 class Donor(db.Model):
 
     __tablename__ = 'donors'

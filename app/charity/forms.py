@@ -11,8 +11,12 @@ class applicationform(FlaskForm):
     Address = StringField('Address', validators=[Required()])
     submit = SubmitField('Apply')
 
+class BeneficiaryForm(FlaskForm):
 
-
+    name = StringField('Name', validators=[Required()])
+    inventory = IntegerField('Inventory:')
+    stories = TextAreaField('User Story:')
+    submit = SubmitField('Add Beneficiary')
 
 
 
