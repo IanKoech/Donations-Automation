@@ -1,5 +1,7 @@
 from . import db
 from datetime import datetime
+from flask_login import UserMixin
+from . import login_manager
 
 class Charity(db.Model):
 
@@ -7,6 +9,7 @@ class Charity(db.Model):
 
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String)
+    password = db.Column(db.String)
     toDoList = db.Column(db.String)
     phoneNumber = db.Column(db.String)
     email = db.Column(db.String)
@@ -19,6 +22,9 @@ class Charity(db.Model):
     def save_charity(self):
         db.session.add(self)
         db.session.commit()
+
+
+    
 
 class Beneficiaries(db.Model):
 
@@ -41,6 +47,8 @@ class Donor(db.Model):
 
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String)
+    email = db.Column(db.String)
+    password = db.Column(db.String)
     accountdetails = db.Column(db.Integer)
     donation_frequency = db.Column(db.Boolean)
     reminding_time = db.Column(db.DateTime,default =datetime.utcnow)
@@ -48,6 +56,8 @@ class Donor(db.Model):
     def save_donor(self):
         db.session.add(self)
         db.session.commit()
+
+
 
 class Donations(db.Model):
 
@@ -67,12 +77,28 @@ class Donations(db.Model):
 
 
 
+def clearusers():
+    Charity.query.delete()
+    Donor.query.delete()
+
+
+class User(UserMixin, db.Model):
+    __tablename__ = 'users'
+    id = db.Column(db.Integer, primary_key = True)
+    username = db.Column(db.String)
+    email = db.Column(db.String)
+    password = db.Column(db.String)
+    
+    
+    def save_user(self):
+        db.session.add(self)
+        db.session.commit()
 
 
 
-
-
-
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.get(int(user_id))
 
 
 

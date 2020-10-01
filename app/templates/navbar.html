@@ -1,37 +1,24 @@
-<div class="navbar navbar-inverse" role="navigation">
-    <div class="container-fluid">
-        <div class="navbar-header">
-
-            <a class="navbar-brand" href="/" style="font-size:large; font-weight: 900; text-align: center;"> Donations Automation</a>
-        </div>
-  
-        <div class="navbar-collapse">
-            <div class='container'>
-                <div class='row'>
-                    <div class='col-md-3'>
-                        <h4><a href="{{url_for('donor.applying')}}">Applying</a></h4>
-                    </div>
-                    <div class='col-md-3'>
-                        <h4><a href="{{url_for('donor.about')}}">About us</a></h4>
-                    </div>
-                    
-                    <div class='col-md-3'>
-                        <h4><a href="{{url_for('charity.apply')}}">Register Charity</a></h4>
-                    </div>
-                    <div class='col-md-3'>
-                        <h4><a href="{{url_for('donor.create_account')}}">Donor Registration</a></h4>
-                    </div>
-                </div>
+<div class="navbar-collapse">
+    <div class='container'>
+        <div class='row'>
+            <div class='col-md-3'>
+                <h4><a href="{{url_for('donor.applying')}}">Applying</a></h4>
             </div>
-            
+            <div class='col-md-3'>
+                <h4><a href="{{url_for('donor.about')}}">About us</a></h4>
+            </div>
 
-           
-
-            
-
-            
-
+            <div class='col-md-3'>
+                <h4><a href="{{url_for('charity.apply')}}">Register Charity</a></h4>
+            </div>
+            <div class='col-md-3'>
+                <h4><a href="{{url_for('donor.create_account')}}">Donor Registration</a></h4>
+            </div>
         </div>
-
+        <div class='row'>
+            <a>Sign in</a>
+        </div>
     </div>
+
+
 </div>

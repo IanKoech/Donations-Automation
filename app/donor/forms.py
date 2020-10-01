@@ -1,13 +1,15 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, BooleanField, SelectField, SubmitField, IntegerField
-from wtforms.validators import Required, Email
+from wtforms import StringField, BooleanField, SelectField, SubmitField, IntegerField, PasswordField
+from wtforms.validators import Required, Email, EqualTo
 
 class Create_Account(FlaskForm):
     
     name = StringField('Name:', validators=[Required()])
-    anonymity = BooleanField('Do you want to be Anonymous?')
     account = IntegerField('Account Number:', validators=[Required()])
     donation_frequency =BooleanField('Autodonate monthly' )
+    email = StringField('Email:',validators=[Required(), Email()])
+    Prefered_password = PasswordField('Prefered password:', validators=[Required(),EqualTo('confirm_password', 'Passwords must match')])
+    confirm_password = PasswordField('Confirm Password')
     submit = SubmitField('Create Account')
     
 class Donation_Form(FlaskForm):
