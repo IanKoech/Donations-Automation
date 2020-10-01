@@ -17,6 +17,7 @@ class DevConfig(Config):
 
 class ProdConfig(Config):
     pass
+
 class TestConfig(Config):
     pass
 
