@@ -1,0 +1,8 @@
+{%extends 'base.html'%}
+
+{%block content%}
+{%for donation in donations%}
+<li>{{donation.Donee}}: {{donation.Amount}}</li>
+{%endfor%}
+<p>Total Donations: {{total_donations}}</p>
+{%endblock%}
