@@ -3,7 +3,12 @@
 {%block content%}
 
     {%for charity in charities%}
-        <li>{{charity.name}}</li>
-        <p>{{charity.toDoList}}</p>
+        <li><strong>Name:</strong>{{charity.name}}</li>
+        <p><strong>Phone Number</strong>{{charity.phoneNumber}}</p>
+        <p><strong>Email:</strong>{{charity.email}}</p>
+        <p><strong>Address:</strong>{{charity.Address}}</p>
+
+        <p><a href="{{url_for('donor.donate', charityname = charity.name, donorname = current_user.username)}}">Donate</a></p>
+        
     {% endfor %}
 {%endblock%}

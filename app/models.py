@@ -15,7 +15,6 @@ class Charity(db.Model):
     email = db.Column(db.String)
     Address = db.Column(db.String)
     donationsReceived = db.Column(db.Integer)
-    Beneficiaries = db.relationship('Beneficiaries', backref = 'charity', lazy = 'dynamic')
     accountDetails = db.Column(db.Integer)
    
 
@@ -34,7 +33,7 @@ class Beneficiaries(db.Model):
     name = db.Column(db.String)
     inventory = db.Column(db.Integer)
     stories = db.Column(db.String)
-    Charity = db.Column(db.Integer, db.ForeignKey('charity.id'))
+    Charity = db.Column(db.String)
 
     def save_beneficiary(self):
         db.session.add(self)
@@ -88,6 +87,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String)
     email = db.Column(db.String)
     password = db.Column(db.String)
+    Role = db.Column(db.String)
     
     
     def save_user(self):

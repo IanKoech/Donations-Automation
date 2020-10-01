@@ -14,6 +14,17 @@
             <div class='col-md-3'>
                 <h4><a href="{{url_for('donor.create_account')}}">Donor Registration</a></h4>
             </div>
+            
+            {%if current_user.is_authenticated%}
+            <div class='col-md-3'>
+                <h4><a href="{{url_for('auth.logout')}}">Log Out</a></h4>
+            </div>
+            {%else%}
+            <div class='col-md-3'>
+                <h4><a href="{{url_for('auth.login')}}">Log in</a></h4>
+            </div>
+            {%endif%}
+
         </div>
         <div class='row'>
             <a>Sign in</a>
@@ -21,4 +32,44 @@
     </div>
 
 
+    {%if current_user.is_authenticated%}
+    {%if current_user.Role == Donor%}
+    <div class="navbar-collapse">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h4><a href="{{url_for('donor.displaycharities')}}">Available Charities</a></h4>
+                </div>
+
+                <div class="col-md-3">
+                    <h4><a href="{{url_for('donor.donations', Donor = current_user.username)}}">Your Donations</a></h4>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+    
+
+    {%else%}
+
+    <div class="navbar-collapse">
+        <div class='container'>
+            <div class='row'>
+                <div class='col-md-3'>
+                    <h4><a href="{{url_for('charity.charityprofile', charityname = current_user.username)}}">{{current_user.username}} Charity Profile</a></h4>
+                </div>
+                <div class='col-md-3'>
+                    <h4><a href="{{url_for('charity.addbeneficiaries', charityname = current_user.username)}}">Add Beneficiaries</a></h4>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+    {%endif%}
+    {%endif%}
 </div>
