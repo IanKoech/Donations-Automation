@@ -5,7 +5,7 @@ from . import donor
 from .forms import Create_Account, Donation_Form
 
 
-@donor.route('/Donor/charities')
+@donor.route('/')
 def displaycharities():
 
     charities = Charity.query.all()
