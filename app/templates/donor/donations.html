@@ -1,0 +1,13 @@
+{%extends 'base.html'%}
+
+{%block content%}
+<ul>
+    {%for donation in donations%}
+
+        <h5>Donee:</h5><p>{{donation.Donee}}</p>
+        <h5>Amount:</h5> <p>{{donation.Amount}} </p>
+        <h5>Date:</h5> <p>{{donation.Date}} </p>
+    {%endfor%}
+</ul>
+
+{%endblock%}
