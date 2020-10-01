@@ -3,8 +3,10 @@ from .. import db
 from . import charity
 from ..models import Charity,Donations,Donor, Beneficiaries
 from .forms import applicationform,BeneficiaryForm
+from flask_login import login_required
 
 @charity.route('/charity/application', methods =['GET','POST'])
+@login_required
 def apply():
 
     form = applicationform()
@@ -14,8 +16,9 @@ def apply():
         phoneNumber = form.phone_number.data
         email = form.email.data
         Address = form.Address.data
+        password = form.preferedpassword.data
 
-        new_charity = Charity(name = name, toDoList = toDoList, phoneNumber =phoneNumber, email =email, Address = Address)
+        new_charity = Charity(name = name, toDoList = toDoList, phoneNumber =phoneNumber, email =email, Address = Address, password= password)
         
         new_charity.save_charity()
         
@@ -50,21 +53,3 @@ def addbeneficiaries():
         return render_template('charity/addbeneficiary.html', form =form)
 
     return render_template('charity/addbeneficiary.html' , form =form)
-    
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-

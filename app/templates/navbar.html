@@ -1,29 +1,25 @@
 <div class="navbar navbar-inverse" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
+
             <a class="navbar-brand" href="/" style="font-size:large; font-weight: 900; text-align: center;"> Donations Automation</a>
         </div>
-        <h2 >Donations Automation</h2>
-        <div class="navbar-collapse collapse">
+  
+        <div class="navbar-collapse">
             <div class='container'>
                 <div class='row'>
                     <div class='col-md-3'>
-                        <h4 href='applying.html'>Applying </h4>
+                        <h4><a href="{{url_for('donor.applying')}}">Applying</a></h4>
                     </div>
                     <div class='col-md-3'>
-                        <h4 href='about.html'>About us</h4>
+                        <h4><a href="{{url_for('donor.about')}}">About us</a></h4>
+                    </div>
+                    
+                    <div class='col-md-3'>
+                        <h4><a href="{{url_for('charity.apply')}}">Register Charity</a></h4>
                     </div>
                     <div class='col-md-3'>
-                        <h4 href='{{url_for(charity.apply)}}'>Register Charity</h4>
-                    </div>
-                    <div class='col-md-3'>
-                        <h4 href='{{url_for(donor.create_account)}}'>Donor Registration</h4>
+                        <h4><a href="{{url_for('donor.create_account')}}">Donor Registration</a></h4>
                     </div>
                 </div>
             </div>

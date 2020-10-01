@@ -7,6 +7,14 @@
     <title>Donations Automation</title>
 </head>
 <body>
+    {%block styles%}
+      <link rel="stylesheet" href="{{url_for('static', filename = 'bootstrap.css')}}">
+    {%endblock%}
+    {%block navbar%}
+
+        {%include 'navbar.html'%}
+
+    {%endblock%}
     {% block content%}
     
     {%endblock%}
