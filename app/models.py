@@ -3,7 +3,7 @@ from datetime import datetime
 from flask_login import UserMixin
 from . import login_manager
 
-class Charity(UserMixin,db.Model):
+class Charity(db.Model):
 
     __tablename__ = 'charity'
 
@@ -23,11 +23,6 @@ class Charity(UserMixin,db.Model):
         db.session.add(self)
         db.session.commit()
 
-    
-    @login_manager.user_loader
-    def load_donor(charity_id):
-    
-        return Donor.query.get(int(charity_id))
 
     
 
@@ -46,7 +41,7 @@ class Beneficiaries(db.Model):
         db.session.commit()
 
 
-class Donor(UserMixin,db.Model):
+class Donor(db.Model):
 
     __tablename__ = 'donors'
 
@@ -62,9 +57,7 @@ class Donor(UserMixin,db.Model):
         db.session.add(self)
         db.session.commit()
 
-    @login_manager.user_loader
-    def load_donor(donor_id):
-        return Donor.query.get(int(donor_id))
+
 
 class Donations(db.Model):
 
@@ -89,11 +82,23 @@ def clearusers():
     Donor.query.delete()
 
 
+class User(UserMixin, db.Model):
+    __tablename__ = 'users'
+    id = db.Column(db.Integer, primary_key = True)
+    username = db.Column(db.String)
+    email = db.Column(db.String)
+    password = db.Column(db.String)
+    
+    
+    def save_user(self):
+        db.session.add(self)
+        db.session.commit()
 
 
 
-
-
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.get(int(user_id))
 
 
 
