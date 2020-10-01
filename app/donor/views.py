@@ -5,13 +5,15 @@ from . import donor
 from .forms import Create_Account, Donation_Form
 from datetime import datetime
 from ..email import reminder_message
+from flask_login import login_required
 
-@donor.route('/Donor/charities')
+@donor.route('/display/charities')
+@login_required
 def displaycharities():
 
     charities = Charity.query.all()
 
-    return render_template('/charity/allcharities.html', charities = charities)
+    return render_template('charity/allcharities.html', charities = charities)
 
 
 @donor.route('/Donor/Create/account', methods =['GET', 'POST'])
@@ -23,8 +25,10 @@ def create_account():
         name = form.name.data
         accountdetails  = form.account.data
         donation_frequency = form.donation_frequency.data
+        email = form.email.data
+        password = form.Prefered_password.data
 
-        new_donor = Donor(name = name,accountdetails = accountdetails , donation_frequency = donation_frequency)
+        new_donor = Donor(name = name,accountdetails = accountdetails , donation_frequency = donation_frequency, email =email, password = password)
         new_donor.save_donor()
 
         return render_template('donor/donoraccountcreation.html', form = form)
@@ -33,6 +37,7 @@ def create_account():
 
 
 @donor.route('/Donor/Donate', methods = ['GET', 'POST'])
+@login_required
 def donate():
 
 
@@ -56,6 +61,7 @@ def donate():
 
 
 @donor.route('/Remind/Donors')
+@login_required
 def remind():
     Donors = Donor.query.all()
     for Donor in Donors:
@@ -66,7 +72,22 @@ def remind():
 
 
 
+@donor.route('/about/us')
+def about():
 
+    return render_template('about.html')
+
+
+@donor.route('/applying')
+def applying():
+
+    return render_template('applying.html')
+
+@donor.route('/')
+@login_required
+def index():
+
+    return render_template('index.html')
 
 
 

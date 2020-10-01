@@ -1,8 +1,8 @@
-"""Update the model tables
+"""initial migrations
 
-Revision ID: 8caf5be199ed
+Revision ID: 03545bde7171
 Revises: 
-Create Date: 2020-09-29 21:03:28.672358
+Create Date: 2020-10-01 09:13:05.406115
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '8caf5be199ed'
+revision = '03545bde7171'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -21,15 +21,19 @@ def upgrade():
     op.create_table('charity',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(), nullable=True),
-    sa.Column('Todolist', sa.String(), nullable=True),
-    sa.Column('Contacts', sa.String(), nullable=True),
-    sa.Column('Donations_received', sa.Integer(), nullable=True),
-    sa.Column('Account_details', sa.Integer(), nullable=True),
+    sa.Column('password', sa.String(), nullable=True),
+    sa.Column('toDoList', sa.String(), nullable=True),
+    sa.Column('phoneNumber', sa.String(), nullable=True),
+    sa.Column('email', sa.String(), nullable=True),
+    sa.Column('Address', sa.String(), nullable=True),
+    sa.Column('donationsReceived', sa.Integer(), nullable=True),
+    sa.Column('accountDetails', sa.Integer(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('donations',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('donor', sa.String(), nullable=True),
+    sa.Column('donorAnonimity', sa.Boolean(), nullable=True),
     sa.Column('Donee', sa.String(), nullable=True),
     sa.Column('Amount', sa.Integer(), nullable=True),
     sa.Column('Date', sa.DateTime(), nullable=True),
@@ -38,9 +42,9 @@ def upgrade():
     op.create_table('donors',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(), nullable=True),
-    sa.Column('anonymity', sa.Boolean(), nullable=True),
+    sa.Column('email', sa.String(), nullable=True),
+    sa.Column('password', sa.String(), nullable=True),
     sa.Column('accountdetails', sa.Integer(), nullable=True),
-    sa.Column('charities', sa.String(), nullable=True),
     sa.Column('donation_frequency', sa.Boolean(), nullable=True),
     sa.Column('reminding_time', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id')

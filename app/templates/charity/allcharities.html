@@ -1,0 +1,9 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+    {%for charity in charities%}
+        <li>{{charity.name}}</li>
+        <p>{{charity.toDoList}}</p>
+    {% endfor %}
+{%endblock%}

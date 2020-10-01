@@ -10,9 +10,9 @@ from flask_login import LoginManager
 db = SQLAlchemy()
 bootstrap =Bootstrap()
 mail = Mail()
-login_manger = LoginManager()
-login_manger.session_protection = 'strong'
-login_manger.login_view = 'charity.login'
+login_manager = LoginManager()
+login_manager.session_protection = 'strong'
+login_manager.login_view = 'auth.login'
 
 
 
@@ -29,7 +29,7 @@ def create_app(config_name):
     db.init_app(app)
     bootstrap.init_app(app)
     mail.init_app(app)
-    login_manger.init_app(app)
+    login_manager.init_app(app)
     # blueprint.init_app(app)
 
     #register the charity blueprint
@@ -39,6 +39,10 @@ def create_app(config_name):
     #register donor blueprint
     from .donor import donor as donor_blueprint
     app.register_blueprint(donor_blueprint)
+
+    #registering the auth blueprint
+    from .Auth import auth as auth_blueprint
+    app.register_blueprint(auth_blueprint)
 
     return app
 
