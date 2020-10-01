@@ -34,8 +34,9 @@ def create_account():
         donation_frequency = form.donation_frequency.data
         email = form.email.data
         password = form.Prefered_password.data
+        Role ='Donor'
 
-        new_donor = Donor(name = name,accountdetails = accountdetails , donation_frequency = donation_frequency, email =email, password = password)
+        new_donor = Donor(name = name,Role = Role,accountdetails = accountdetails , donation_frequency = donation_frequency, email =email, password = password)
         user = User(username = name, email =email, password = password )
         new_donor.save_donor()
         user.save_user()
@@ -45,26 +46,31 @@ def create_account():
     return render_template('donor/donoraccountcreation.html', form = form, charities = Allcharities, Donors = AllDonors)
 
 
-@donor.route('/Donor/Donate', methods = ['GET', 'POST'])
+@donor.route('/Donor/Donate/<charityname>/<donorname>', methods = ['GET', 'POST'])
 @login_required
-def donate():
+def donate(charityname, donorname):
     Allcharities = Charity.query.all()
     AllDonors = Charity.query.all()
+    
+
+
 
     form = Donation_Form()
     
     if form.validate_on_submit():
 
-        donee = 'Dancan Sandys'
-        donor = 'Dancan Oruko'
+        donee = charityname
+        donor = donorname
         amount = form.amount.data
         donorAnonymity = form.Anonymity.data
 
         new_donation = Donations(Donee= donee, donor = donor, Amount= amount)
         new_donation.save_donation()
 
+         
 
-        return render_template('donor/donoraccountcreation.html', form = form, charities = Allcharities, Donors = AllDonors)
+
+        return redirect(url_for('donor.displaycharities'))
 
     return render_template('donor/donoraccountcreation.html', form = form, charities = Allcharities, Donors = AllDonors)
 
@@ -103,11 +109,18 @@ def applying():
 @donor.route('/')
 
 def index():
-    Allcharities = Charity.query.all()
-    AllDonors = Charity.query.all()
+  
 
-    return render_template('index.html', charities = Allcharities, Donors = AllDonors)
+    return render_template('index.html')
 
+@donor.route('/past/donation/<Donor>')
+def donations(Donor):
+
+    yourdonations = Donations.query.filter_by(donor = Donor).all()
+
+    return render_template('donor/donations.html', donations = yourdonations)
+
+    
 
 
 
