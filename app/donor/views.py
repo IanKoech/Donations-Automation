@@ -3,7 +3,8 @@ from .. import db
 from ..models import Donations, Donor, Charity,Beneficiaries
 from . import donor
 from .forms import Create_Account, Donation_Form
-
+from datetime import datetime
+from ..email import reminder_message
 
 @donor.route('/')
 def displaycharities():
@@ -52,6 +53,16 @@ def donate():
 
     return render_template('donor/donoraccountcreation.html', form = form)
 
+
+
+@donor.route('/Remind/Donors')
+def remind():
+    Donors = Donor.query.all()
+    for Donor in Donors:
+        if Donor.reminding_time == datetime.utcnow:
+            reminder_message('A reminder for your monthly donations', 'reminder', Donor, **kwargs )
+
+    return reminder_message('charity/allcharities.html')            
 
 
 
