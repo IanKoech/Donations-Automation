@@ -3,9 +3,11 @@
 
 {% block content %}
 <h6>You need to register as a <strong><a href="{{url_for('charity.apply')}}">charity</a></strong> or <strong><a href="{{url_for('donor.create_account')}}">Donor</a></strong> first before you can login</h6>
-<div class="container">
+<div class="container" style="text-align: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: rgb(12, 13, 28);color: #E95420;">
     <div class="row">
-        <div class="col-md-2"> </div>
+        <div class="col-md-2"> 
+
+        </div>
         <div class="col-md-8">
 
             {{wtf.quick_form(form)}}
